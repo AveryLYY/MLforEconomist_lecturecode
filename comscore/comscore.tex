@@ -1,0 +1,600 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={comscore.R},
+  pdfauthor={liuyunyi},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{comscore.R}
+\author{liuyunyi}
+\date{2026-02-09}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+\DocumentationTok{\#\#\#\# comscore web{-}browsing data}
+\FunctionTok{library}\NormalTok{(gamlr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: Matrix
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(glmnet)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loaded glmnet 4.1-10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Browsing History. }
+\DocumentationTok{\#\# The table has three colums: [machine] id, site [id], [\# of] visits}
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/Desktop/CUHK/Econ5181{-}machine learning/comscore"}\NormalTok{)}
+\NormalTok{web }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"CS2006domains.csv"}\NormalTok{)}
+
+\FunctionTok{subset}\NormalTok{(web,web}\SpecialCharTok{$}\NormalTok{id}\SpecialCharTok{==}\DecValTok{5625}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           id site visits
+## 11892   5625  160      1
+## 19015   5625  289      8
+## 35871   5625  126      1
+## 49551   5625   48      1
+## 116038  5625   53      1
+## 147675  5625   26      1
+## 161180  5625  112      1
+## 169926  5625  676      1
+## 188817  5625  114      3
+## 207099  5625  475      1
+## 210683  5625  494      1
+## 216997  5625    7     58
+## 243989  5625  122     17
+## 257050  5625    1     42
+## 263983  5625  263      1
+## 323828  5625   68      1
+## 329301  5625  275      1
+## 334906  5625  855      1
+## 343695  5625  291      1
+## 362263  5625  216      2
+## 399278  5625   65      1
+## 431262  5625  413      2
+## 441753  5625   10      2
+## 461262  5625  278      5
+## 470770  5625  233      1
+## 487589  5625  351      1
+## 521525  5625   46      1
+## 543031  5625  123      5
+## 651698  5625  529      1
+## 656055  5625   23      3
+## 665186  5625   44      2
+## 683732  5625  941      1
+## 701422  5625  574      1
+## 707994  5625   75      1
+## 732365  5625  179      6
+## 757362  5625   47      1
+## 827538  5625  485      1
+## 848026  5625  234      1
+## 859942  5625   56      1
+## 882908  5625    6      4
+## 895713  5625  103      2
+## 905115  5625    9     19
+## 931157  5625  417      2
+## 944820  5625  615      2
+## 948603  5625  933      2
+## 956593  5625  362      1
+## 959916  5625  942      1
+## 987170  5625  433      1
+## 1003817 5625  265      1
+## 1010758 5625   21      1
+## 1031501 5625   59      1
+## 1039371 5625  124      1
+## 1046261 5625  117      2
+## 1055750 5625  712      1
+## 1075729 5625  285     10
+## 1086505 5625   43      3
+## 1093932 5625  579      3
+## 1102394 5625  792      1
+## 1110354 5625  526      5
+## 1116134 5625  635      2
+## 1148827 5625   16      1
+## 1158819 5625   72      2
+## 1181713 5625  499      2
+## 1184397 5625  854     28
+## 1189056 5625  191      2
+## 1215828 5625   94      2
+## 1223718 5625  220      4
+## 1239657 5625   18      1
+## 1250575 5625  791      5
+## 1251571 5625  816      3
+## 1301077 5625    5      2
+## 1393699 5625   32      2
+## 1427567 5625  282      1
+## 1474119 5625  274      3
+## 1499554 5625   41      3
+## 1512455 5625   36      1
+## 1517938 5625   74      1
+## 1544357 5625  379      1
+## 1568893 5625   13      1
+## 1591169 5625  453      3
+## 1597562 5625  699      3
+## 1599088 5625  439      1
+## 1610344 5625  104      1
+## 1622567 5625    8      1
+## 1636723 5625  288      2
+## 1652332 5625   24      4
+## 1660171 5625  120      3
+## 1665099 5625  367      1
+## 1698399 5625   88      1
+## 1720000 5625   30      2
+## 1747776 5625  177      2
+## 1758089 5625  358      6
+## 1772041 5625   51      2
+## 1792251 5625  464      1
+## 1812946 5625  716      2
+## 1831841 5625  348     46
+## 1843879 5625   50      4
+## 1851755 5625  152      2
+## 1904052 5625   81      1
+## 1912478 5625  163      1
+## 1942471 5625  495      1
+## 1962056 5625  847      1
+## 1987980 5625  287      5
+## 1992924 5625  139      1
+## 2000620 5625   20      2
+## 2007451 5625  582      1
+## 2011463 5625  294      1
+## 2038938 5625  844      1
+## 2058280 5625  255      1
+## 2114430 5625  135      3
+## 2123428 5625  607      1
+## 2130349 5625   52      2
+## 2152382 5625  872      1
+## 2171668 5625  128      2
+## 2199448 5625  192      1
+## 2206336 5625    2    325
+## 2263568 5625   25     14
+## 2271074 5625  694      3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Tell R that \textquotesingle{}id\textquotesingle{} is a factor; we know there are 10000 household machines}
+
+\NormalTok{n }\OtherTok{\textless{}{-}} \FloatTok{1e4}
+
+\NormalTok{web}\SpecialCharTok{$}\NormalTok{id }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{id, }\AttributeTok{levels=}\DecValTok{1}\SpecialCharTok{:}\NormalTok{n)}
+
+\DocumentationTok{\#\# Read in the actual website names, and use these to create a site factor}
+\DocumentationTok{\#\# We know that there are 1000, and these are their names (in correct order)}
+
+\NormalTok{d }\OtherTok{\textless{}{-}} \FloatTok{1e3}
+
+\NormalTok{sitenames }\OtherTok{\textless{}{-}} \FunctionTok{scan}\NormalTok{(}\StringTok{"CS2006sites.txt"}\NormalTok{, }\AttributeTok{what=}\StringTok{"character"}\NormalTok{)}
+
+\NormalTok{web}\SpecialCharTok{$}\NormalTok{site }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{site, }\AttributeTok{levels=}\DecValTok{1}\SpecialCharTok{:}\NormalTok{d, }\AttributeTok{labels=}\NormalTok{sitenames)}
+
+\FunctionTok{subset}\NormalTok{(web,web}\SpecialCharTok{$}\NormalTok{id}\SpecialCharTok{==}\DecValTok{5625}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           id                      site visits
+## 11892   5625                   2o7.net      1
+## 19015   5625                  4at1.com      8
+## 35871   5625                 about.com      1
+## 49551   5625               adbrite.com      1
+## 116038  5625              adserver.com      1
+## 147675  5625           advertising.com      1
+## 161180  5625                akamai.net      1
+## 169926  5625            allrecipes.com      1
+## 188817  5625            amazon.com-o01      3
+## 207099  5625             angelfire.com      1
+## 210683  5625               answers.com      1
+## 216997  5625                   aol.com     58
+## 243989  5625                   ask.com     17
+## 257050  5625                 atdmt.com     42
+## 263983  5625                   att.net      1
+## 323828  5625                 belnk.com      1
+## 329301  5625               bestbuy.com      1
+## 334906  5625                   bhg.com      1
+## 343695  5625               bizrate.com      1
+## 362263  5625             bloglines.com      2
+## 399278  5625              burstnet.com      1
+## 431262  5625            careercast.com      2
+## 441753  5625           casalemedia.com      2
+## 461262  5625          cheaptickets.com      5
+## 470770  5625               chitika.net      1
+## 487589  5625            citysearch.com      1
+## 521525  5625               comcast.net      1
+## 543031  5625            contextweb.com      5
+## 651698  5625           ebaumsworld.com      1
+## 656055  5625                  ebay.com      3
+## 665186  5625           ebayobjects.com      2
+## 683732  5625                ediets.com      1
+## 701422  5625                eprize.net      1
+## 707994  5625             euroclick.com      1
+## 732365  5625               expedia.com      6
+## 757362  5625             fastclick.net      1
+## 827538  5625           frontiernet.net      1
+## 848026  5625             geocities.com      1
+## 859942  5625                    go.com      1
+## 882908  5625                google.com      4
+## 895713  5625      googleadservices.com      2
+## 905115  5625 googlesyndication.com-o02     19
+## 931157  5625             homedepot.com      2
+## 944820  5625                hotels.com      2
+## 948603  5625               hotwire.com      2
+## 956593  5625                   hsn.com      1
+## 959916  5625         ichotelsgroup.com      1
+## 987170  5625           incredimail.com      1
+## 1003817 5625        insightexpress.com      1
+## 1010758 5625      insightexpressai.com      1
+## 1031501 5625            intellisrv.net      1
+## 1039371 5625            intellitxt.com      1
+## 1046261 5625            interclick.com      2
+## 1055750 5625                intuit.com      1
+## 1075729 5625              jcpenney.com     10
+## 1086505 5625              kanoodle.com      3
+## 1093932 5625                   kbb.com      3
+## 1102394 5625                 kmart.com      1
+## 1110354 5625                 kohls.com      5
+## 1116134 5625            kraftfoods.com      2
+## 1148827 5625                  live.com      1
+## 1158819 5625            liveperson.net      2
+## 1181713 5625                 lowes.com      2
+## 1184397 5625        ltdcommodities.com     28
+## 1189056 5625                 lycos.com      2
+## 1215828 5625              mapquest.com      2
+## 1223718 5625           marketwatch.com      4
+## 1239657 5625             mediaplex.com      1
+## 1250575 5625                     mi.us      5
+## 1251571 5625              michigan.gov      3
+## 1301077 5625                   msn.com      2
+## 1393699 5625                nextag.com      2
+## 1427567 5625  nyadmcncserve-05y06a.com      1
+## 1474119 5625                orbitz.com      3
+## 1499554 5625        partner2profit.com      3
+## 1512455 5625              passport.com      1
+## 1517938 5625              passport.net      1
+## 1544357 5625          perfectmatch.com      1
+## 1568893 5625             pointroll.com      1
+## 1591169 5625             priceline.com      3
+## 1597562 5625               prodigy.net      3
+## 1599088 5625            proficient.com      1
+## 1610344 5625                  qnsr.com      1
+## 1622567 5625        questionmarket.com      1
+## 1636723 5625                   qvc.com      2
+## 1652332 5625             realmedia.com      4
+## 1660171 5625       realtechnetwork.net      3
+## 1665099 5625               realtor.com      1
+## 1698399 5625                revsci.net      1
+## 1720000 5625                   ru4.com      2
+## 1747776 5625          searchignite.com      2
+## 1758089 5625                 sears.com      6
+## 1772041 5625           serving-sys.com      2
+## 1792251 5625             shoplocal.com      1
+## 1812946 5625              sidestep.com      2
+## 1831841 5625                  sony.com     46
+## 1843879 5625         specificclick.net      4
+## 1851755 5625         specificmedia.com      2
+## 1904052 5625                tacoda.net      1
+## 1912478 5625                target.com      1
+## 1942471 5625               timeinc.net      1
+## 1962056 5625               toseeka.com      1
+## 1987980 5625           travelocity.com      5
+## 1992924 5625             travelzoo.com      1
+## 2000620 5625          tribalfusion.com      2
+## 2007451 5625           tripadvisor.com      1
+## 2011463 5625                tripod.com      1
+## 2038938 5625                united.com      1
+## 2058280 5625                  usps.com      1
+## 2114430 5625               walmart.com      3
+## 2123428 5625            warnerbros.com      1
+## 2130349 5625               weather.com      2
+## 2152382 5625     websourcedtraffic.com      1
+## 2171668 5625             wikipedia.org      2
+## 2199448 5625                 xanga.com      1
+## 2206336 5625                 yahoo.com    325
+## 2263568 5625                  zedo.com     14
+## 2271074 5625                 zwire.com      3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{o}\OtherTok{\textless{}{-}}\FunctionTok{order}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{id)}
+
+\NormalTok{web}\OtherTok{\textless{}{-}}\NormalTok{web[o,]}
+
+\DocumentationTok{\#\# get total visits per{-}machine and \% of time on each site}
+\DocumentationTok{\#\# tapply(a,b,c) does c(a) for every level of factor b.}
+
+\NormalTok{machinetotals }\OtherTok{\textless{}{-}} \FunctionTok{as.vector}\NormalTok{(}\FunctionTok{tapply}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{visits,web}\SpecialCharTok{$}\NormalTok{id,sum)) }
+
+\DocumentationTok{\#\# tapply() returns a named array, not a plain vector.}
+
+\DocumentationTok{\#\# it returns matrix; we\textquotesingle{}ll make it a vector}
+
+\NormalTok{web}\SpecialCharTok{$}\NormalTok{visitpercent }\OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\NormalTok{web}\SpecialCharTok{$}\NormalTok{visits}\SpecialCharTok{/}\NormalTok{machinetotals[web}\SpecialCharTok{$}\NormalTok{id]}
+
+\DocumentationTok{\#\# use this info in a sparse matrix}
+\DocumentationTok{\#\# this is something you\textquotesingle{}ll be doing a lot; familiarize yourself.}
+
+\NormalTok{xweb }\OtherTok{\textless{}{-}} \FunctionTok{sparseMatrix}\NormalTok{(}
+    \AttributeTok{i=}\FunctionTok{as.numeric}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{id), }
+    \AttributeTok{j=}\FunctionTok{as.numeric}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{site), }
+    \AttributeTok{x=}\NormalTok{web}\SpecialCharTok{$}\NormalTok{visitpercent,}
+    \AttributeTok{dims=}\FunctionTok{c}\NormalTok{(}\FunctionTok{nlevels}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{id),}\FunctionTok{nlevels}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{site)),}
+    \AttributeTok{dimnames=}\FunctionTok{list}\NormalTok{(}\AttributeTok{id=}\FunctionTok{levels}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{id), }\AttributeTok{site=}\FunctionTok{levels}\NormalTok{(web}\SpecialCharTok{$}\NormalTok{site)))}
+
+\DocumentationTok{\#\# now read in the spending data }
+
+\NormalTok{yspend }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"CS2006totalspend.csv"}\NormalTok{, }\AttributeTok{row.names=}\DecValTok{1}\NormalTok{)  }\CommentTok{\# us 1st column as row names}
+
+\NormalTok{yspend }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(yspend) }\DocumentationTok{\#\# good practice to move from dataframe to matrix}
+
+\DocumentationTok{\#\# run a regression}
+
+\NormalTok{spender }\OtherTok{\textless{}{-}} \FunctionTok{gamlr}\NormalTok{(xweb, }\FunctionTok{log}\NormalTok{(yspend), }\AttributeTok{verb=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## *** n=10000 observations and p=1000 covariates ***
+## segment 1: lambda = 0.2325, dev = 2.783e+04, npass = 0
+## segment 2: lambda = 0.2219, dev = 2.778e+04, npass = 3
+## segment 3: lambda = 0.2118, dev = 2.774e+04, npass = 3
+## segment 4: lambda = 0.2022, dev = 2.77e+04, npass = 3
+## segment 5: lambda = 0.193, dev = 2.766e+04, npass = 3
+## segment 6: lambda = 0.1842, dev = 2.76e+04, npass = 3
+## segment 7: lambda = 0.1759, dev = 2.753e+04, npass = 4
+## segment 8: lambda = 0.1679, dev = 2.744e+04, npass = 5
+## segment 9: lambda = 0.1602, dev = 2.733e+04, npass = 5
+## segment 10: lambda = 0.153, dev = 2.72e+04, npass = 5
+## segment 11: lambda = 0.146, dev = 2.708e+04, npass = 5
+## segment 12: lambda = 0.1394, dev = 2.697e+04, npass = 5
+## segment 13: lambda = 0.133, dev = 2.687e+04, npass = 5
+## segment 14: lambda = 0.127, dev = 2.676e+04, npass = 5
+## segment 15: lambda = 0.1212, dev = 2.663e+04, npass = 5
+## segment 16: lambda = 0.1157, dev = 2.65e+04, npass = 5
+## segment 17: lambda = 0.1104, dev = 2.639e+04, npass = 5
+## segment 18: lambda = 0.1054, dev = 2.628e+04, npass = 5
+## segment 19: lambda = 0.1006, dev = 2.616e+04, npass = 5
+## segment 20: lambda = 0.09606, dev = 2.605e+04, npass = 5
+## segment 21: lambda = 0.09169, dev = 2.595e+04, npass = 5
+## segment 22: lambda = 0.08753, dev = 2.584e+04, npass = 5
+## segment 23: lambda = 0.08355, dev = 2.574e+04, npass = 4
+## segment 24: lambda = 0.07975, dev = 2.564e+04, npass = 4
+## segment 25: lambda = 0.07613, dev = 2.553e+04, npass = 4
+## segment 26: lambda = 0.07267, dev = 2.543e+04, npass = 4
+## segment 27: lambda = 0.06936, dev = 2.532e+04, npass = 4
+## segment 28: lambda = 0.06621, dev = 2.522e+04, npass = 4
+## segment 29: lambda = 0.0632, dev = 2.511e+04, npass = 4
+## segment 30: lambda = 0.06033, dev = 2.501e+04, npass = 4
+## segment 31: lambda = 0.05759, dev = 2.491e+04, npass = 4
+## segment 32: lambda = 0.05497, dev = 2.481e+04, npass = 4
+## segment 33: lambda = 0.05247, dev = 2.47e+04, npass = 4
+## segment 34: lambda = 0.05009, dev = 2.46e+04, npass = 4
+## segment 35: lambda = 0.04781, dev = 2.449e+04, npass = 5
+## segment 36: lambda = 0.04564, dev = 2.438e+04, npass = 5
+## segment 37: lambda = 0.04356, dev = 2.427e+04, npass = 6
+## segment 38: lambda = 0.04158, dev = 2.416e+04, npass = 6
+## segment 39: lambda = 0.03969, dev = 2.405e+04, npass = 6
+## segment 40: lambda = 0.03789, dev = 2.395e+04, npass = 6
+## segment 41: lambda = 0.03617, dev = 2.384e+04, npass = 6
+## segment 42: lambda = 0.03452, dev = 2.374e+04, npass = 6
+## segment 43: lambda = 0.03295, dev = 2.365e+04, npass = 6
+## segment 44: lambda = 0.03146, dev = 2.355e+04, npass = 5
+## segment 45: lambda = 0.03003, dev = 2.346e+04, npass = 5
+## segment 46: lambda = 0.02866, dev = 2.337e+04, npass = 5
+## segment 47: lambda = 0.02736, dev = 2.328e+04, npass = 5
+## segment 48: lambda = 0.02611, dev = 2.319e+04, npass = 5
+## segment 49: lambda = 0.02493, dev = 2.311e+04, npass = 5
+## segment 50: lambda = 0.02379, dev = 2.302e+04, npass = 5
+## segment 51: lambda = 0.02271, dev = 2.293e+04, npass = 5
+## segment 52: lambda = 0.02168, dev = 2.285e+04, npass = 5
+## segment 53: lambda = 0.0207, dev = 2.277e+04, npass = 5
+## segment 54: lambda = 0.01975, dev = 2.269e+04, npass = 5
+## segment 55: lambda = 0.01886, dev = 2.261e+04, npass = 4
+## segment 56: lambda = 0.018, dev = 2.253e+04, npass = 4
+## segment 57: lambda = 0.01718, dev = 2.245e+04, npass = 4
+## segment 58: lambda = 0.0164, dev = 2.238e+04, npass = 4
+## segment 59: lambda = 0.01566, dev = 2.23e+04, npass = 4
+## segment 60: lambda = 0.01494, dev = 2.223e+04, npass = 4
+## segment 61: lambda = 0.01426, dev = 2.216e+04, npass = 5
+## segment 62: lambda = 0.01362, dev = 2.209e+04, npass = 4
+## segment 63: lambda = 0.013, dev = 2.203e+04, npass = 4
+## segment 64: lambda = 0.01241, dev = 2.197e+04, npass = 4
+## segment 65: lambda = 0.01184, dev = 2.191e+04, npass = 4
+## segment 66: lambda = 0.0113, dev = 2.186e+04, npass = 4
+## segment 67: lambda = 0.01079, dev = 2.18e+04, npass = 4
+## segment 68: lambda = 0.0103, dev = 2.175e+04, npass = 6
+## segment 69: lambda = 0.009832, dev = 2.17e+04, npass = 4
+## segment 70: lambda = 0.009385, dev = 2.165e+04, npass = 6
+## segment 71: lambda = 0.008959, dev = 2.16e+04, npass = 7
+## segment 72: lambda = 0.008551, dev = 2.155e+04, npass = 7
+## segment 73: lambda = 0.008163, dev = 2.151e+04, npass = 6
+## segment 74: lambda = 0.007792, dev = 2.147e+04, npass = 6
+## segment 75: lambda = 0.007438, dev = 2.143e+04, npass = 6
+## segment 76: lambda = 0.007099, dev = 2.139e+04, npass = 6
+## segment 77: lambda = 0.006777, dev = 2.136e+04, npass = 6
+## segment 78: lambda = 0.006469, dev = 2.132e+04, npass = 6
+## segment 79: lambda = 0.006175, dev = 2.129e+04, npass = 7
+## segment 80: lambda = 0.005894, dev = 2.126e+04, npass = 7
+## segment 81: lambda = 0.005626, dev = 2.122e+04, npass = 10
+## segment 82: lambda = 0.00537, dev = 2.119e+04, npass = 10
+## segment 83: lambda = 0.005126, dev = 2.117e+04, npass = 9
+## segment 84: lambda = 0.004893, dev = 2.114e+04, npass = 9
+## segment 85: lambda = 0.004671, dev = 2.112e+04, npass = 9
+## segment 86: lambda = 0.004459, dev = 2.109e+04, npass = 8
+## segment 87: lambda = 0.004256, dev = 2.107e+04, npass = 8
+## segment 88: lambda = 0.004063, dev = 2.105e+04, npass = 8
+## segment 89: lambda = 0.003878, dev = 2.103e+04, npass = 7
+## segment 90: lambda = 0.003702, dev = 2.102e+04, npass = 7
+## segment 91: lambda = 0.003533, dev = 2.1e+04, npass = 7
+## segment 92: lambda = 0.003373, dev = 2.098e+04, npass = 7
+## segment 93: lambda = 0.00322, dev = 2.097e+04, npass = 6
+## segment 94: lambda = 0.003073, dev = 2.095e+04, npass = 6
+## segment 95: lambda = 0.002934, dev = 2.094e+04, npass = 6
+## segment 96: lambda = 0.0028, dev = 2.093e+04, npass = 6
+## segment 97: lambda = 0.002673, dev = 2.091e+04, npass = 6
+## segment 98: lambda = 0.002551, dev = 2.09e+04, npass = 5
+## segment 99: lambda = 0.002435, dev = 2.089e+04, npass = 5
+## segment 100: lambda = 0.002325, dev = 2.088e+04, npass = 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# other common arguments: nlambda, lambda.min.ratio}
+
+\NormalTok{spender2}\OtherTok{\textless{}{-}}\FunctionTok{glmnet}\NormalTok{(xweb,}\FunctionTok{log}\NormalTok{(yspend),}\AttributeTok{family=}\StringTok{"gaussian"}\NormalTok{)}
+
+
+\FunctionTok{plot}\NormalTok{(spender) }\DocumentationTok{\#\# path plot}
+\end{Highlighting}
+\end{Shaded}
+
+% Figure file not found - uncomment after running R code to generate the figure
+% \includegraphics{comscore_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# a few examples}
+
+
+\NormalTok{B }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(spender) }\DocumentationTok{\#\# the coefficients selected under AICc}
+
+\NormalTok{B }\OtherTok{\textless{}{-}}\NormalTok{ B[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,] }\CommentTok{\# drop intercept }
+
+\NormalTok{B[}\FunctionTok{which.min}\NormalTok{(B)] }\DocumentationTok{\#\# low spenders spend a lot of time here}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## cursormania.com 
+##       -0.998143
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B[}\FunctionTok{which.max}\NormalTok{(B)] }\DocumentationTok{\#\# big spenders hang out here}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## shopyourbargain.com 
+##            1.294246
+\end{verbatim}
+
+\end{document}

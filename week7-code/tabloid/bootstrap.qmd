@@ -1,0 +1,24 @@
+---
+title: "bootstrap"
+format: pdf
+editor: visual
+---
+
+```{r}
+#| include: false
+Sys.setenv(RETICULATE_PYTHON = "/opt/anaconda3/envs/myenv/bin/python")
+library(reticulate)
+py_config()
+```
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+```{python}
+x = np.linspace(0, 10, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
