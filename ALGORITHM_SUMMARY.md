@@ -1,35 +1,44 @@
 ## LASSO, kNN, CV
 
-### Supervised learing + Tuning + Evaluation
-1. Split for final evaluation: Randomly split data into train and test
-2. Preprocess
-    - Handle missing value/outliers
-    - Encode categorical variables
-    - Standardize features (LASSO is scale-sensitive)
-3. k-fold CV on train to choose $\lambda$
-    - Ramdomly partition training set into k-fold
-    - For each $\lambda$:
+### Supervised Learning + Tuning + Evaluation
 
-        For each k = 1, …, k:
+**Step 1: Train-Test Split**
+- Randomly split data into train and test sets for final evaluation
 
-        1) let train_k = train excluding fold k; let valid_k = fold k
+**Step 2: Preprocessing**
+- Handle missing values and outliers
+- Encode categorical variables
+- Standardize features (LASSO is scale-sensitive)
 
-        2) fit preprocessing on train_k
+**Step 3: k-Fold Cross-Validation for Hyperparameter Selection**
 
-        3) fit model    $\widehat{\operatorname{f}_{\lambda,\ -k}}$ using train_k
+For each candidate $\lambda$:
 
-        4) predict $\widehat{y_i}=\widehat{f_{\lambda,-k}}\left(x_i\right) for i\ \in valid\ i$
+1. Randomly partition training set into k folds
 
-        5) compute validation error: $err_{\lambda,k}=\frac{1}{\left|valid_k\right|}\sum_{i\in valid_k}L\left(\operatorname{y}_i,\widehat{\operatorname{y}_i}\right)$
+2. **FOR** fold $f = 1, \ldots, k$:
+    - Let $\text{train}_f$ = training set excluding fold $f$
+    - Let $\text{valid}_f$ = fold $f$
+    - Fit preprocessing on $\text{train}_f$
+    - Train model: $\widehat{f}_{\lambda,-f}$ on $\text{train}_f$
+    - Predict on validation: $\widehat{y}_i = \widehat{f}_{\lambda,-f}(x_i)$ for $i \in \text{valid}_f$
+    - Compute validation error: $$\text{err}_{\lambda,f} = \frac{1}{|\text{valid}_f|}\sum_{i \in \text{valid}_f} L(y_i, \widehat{y}_i)$$
 
-    - Compute CV Score $CV(\lambda)=\frac{1}{k}\sum_{k=1}^{k}err_{\lambda,k}$
-4. Select $\lambda$
-    - Min rule : arg min cv($\lambda$)
-    - 1se rule: choose the simplest model whose cv($\lambda$) is within 1se of the min
-5. Refit final model
-    - Refit preprocessing on the full training set: arg min $\frac{1}{n}\sum_{i=1}^{n}\left(y_i-f\left(x_i\right)\right)^2+\lambda^\ast R\left(f\right)$
-    - Fit $\widehat{f_{\lambda^\ast}}$ on the full training set
-6. Final test evaluation
+3. Compute CV score: $$CV(\lambda) = \frac{1}{k}\sum_{f=1}^{k} \text{err}_{\lambda,f}$$
+
+**Step 4: Select Optimal $\lambda$**
+
+- **Min rule:** $\lambda^* = \arg\min_\lambda CV(\lambda)$
+- **1SE rule:** Choose the simplest model whose $CV(\lambda)$ is within 1 standard error of the minimum
+
+**Step 5: Refit Final Model**
+
+- Refit preprocessing on full training set
+- Train final model on full training set: $$\widehat{f}_{\lambda^*} = \arg\min_f \frac{1}{n}\sum_{i=1}^{n}L(y_i, f(x_i)) + \lambda^* R(f)$$
+
+**Step 6: Final Test Evaluation**
+
+- Evaluate $\widehat{f}_{\lambda^*}$ on held-out test set
 
 ### R Code
 ```r

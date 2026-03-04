@@ -114,42 +114,39 @@ window.Quarto = {
 
 <section id="lasso-knn-cv" class="level2">
 <h2 class="anchored" data-anchor-id="lasso-knn-cv">LASSO, kNN, CV</h2>
-<section id="supervised-learing-tuning-evaluation" class="level3">
-<h3 class="anchored" data-anchor-id="supervised-learing-tuning-evaluation">Supervised learing + Tuning + Evaluation</h3>
+<section id="supervised-learning-tuning-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="supervised-learning-tuning-evaluation">Supervised Learning + Tuning + Evaluation</h3>
+<p><strong>Step 1: Train-Test Split</strong> - Randomly split data into train and test sets for final evaluation</p>
+<p><strong>Step 2: Preprocessing</strong> - Handle missing values and outliers - Encode categorical variables - Standardize features (LASSO is scale-sensitive)</p>
+<p><strong>Step 3: k-Fold Cross-Validation for Hyperparameter Selection</strong></p>
+<p>For each candidate <span class="math inline">\(\lambda\)</span>:</p>
 <ol type="1">
-<li>Split for final evaluation: Randomly split data into train and test</li>
-<li>Preprocess
+<li><p>Randomly partition training set into k folds</p></li>
+<li><p><strong>FOR</strong> fold <span class="math inline">\(f = 1, \ldots, k\)</span>:</p>
 <ul>
-<li>Handle missing value/outliers</li>
-<li>Encode categorical variables</li>
-<li>Standardize features (LASSO is scale-sensitive)</li>
+<li>Let <span class="math inline">\(\text{train}_f\)</span> = training set excluding fold <span class="math inline">\(f\)</span></li>
+<li>Let <span class="math inline">\(\text{valid}_f\)</span> = fold <span class="math inline">\(f\)</span></li>
+<li>Fit preprocessing on <span class="math inline">\(\text{train}_f\)</span></li>
+<li>Train model: <span class="math inline">\(\widehat{f}_{\lambda,-f}\)</span> on <span class="math inline">\(\text{train}_f\)</span></li>
+<li>Predict on validation: <span class="math inline">\(\widehat{y}_i = \widehat{f}_{\lambda,-f}(x_i)\)</span> for <span class="math inline">\(i \in \text{valid}_f\)</span></li>
+<li>Compute validation error: <span class="math display">\[\text{err}_{\lambda,f} = \frac{1}{|\text{valid}_f|}\sum_{i \in \text{valid}_f} L(y_i, \widehat{y}_i)\]</span></li>
 </ul></li>
-<li>k-fold CV on train to choose <span class="math inline">\(\lambda\)</span>
-<ul>
-<li><p>Ramdomly partition training set into k-fold</p></li>
-<li><p>For each <span class="math inline">\(\lambda\)</span>:</p>
-<p>For each k = 1, …, k:</p>
-<ol type="1">
-<li><p>let train_k = train excluding fold k; let valid_k = fold k</p></li>
-<li><p>fit preprocessing on train_k</p></li>
-<li><p>fit model <span class="math inline">\(\widehat{\operatorname{f}_{\lambda,\ -k}}\)</span> using train_k</p></li>
-<li><p>predict <span class="math inline">\(\widehat{y_i}=\widehat{f_{\lambda,-k}}\left(x_i\right) for i\ \in valid\ i\)</span></p></li>
-<li><p>compute validation error: <span class="math inline">\(err_{\lambda,k}=\frac{1}{\left|valid_k\right|}\sum_{i\in valid_k}L\left(\operatorname{y}_i,\widehat{\operatorname{y}_i}\right)\)</span></p></li>
-</ol></li>
-<li><p>Compute CV Score <span class="math inline">\(CV(\lambda)=\frac{1}{k}\sum_{k=1}^{k}err_{\lambda,k}\)</span></p></li>
-</ul></li>
-<li>Select <span class="math inline">\(\lambda\)</span>
-<ul>
-<li>Min rule : arg min cv(<span class="math inline">\(\lambda\)</span>)</li>
-<li>1se rule: choose the simplest model whose cv(<span class="math inline">\(\lambda\)</span>) is within 1se of the min</li>
-</ul></li>
-<li>Refit final model
-<ul>
-<li>Refit preprocessing on the full training set: arg min <span class="math inline">\(\frac{1}{n}\sum_{i=1}^{n}\left(y_i-f\left(x_i\right)\right)^2+\lambda^\ast R\left(f\right)\)</span></li>
-<li>Fit <span class="math inline">\(\widehat{f_{\lambda^\ast}}\)</span> on the full training set</li>
-</ul></li>
-<li>Final test evaluation</li>
+<li><p>Compute CV score: <span class="math display">\[CV(\lambda) = \frac{1}{k}\sum_{f=1}^{k} \text{err}_{\lambda,f}\]</span></p></li>
 </ol>
+<p><strong>Step 4: Select Optimal <span class="math inline">\(\lambda\)</span></strong></p>
+<ul>
+<li><strong>Min rule:</strong> <span class="math inline">\(\lambda^* = \arg\min_\lambda CV(\lambda)\)</span></li>
+<li><strong>1SE rule:</strong> Choose the simplest model whose <span class="math inline">\(CV(\lambda)\)</span> is within 1 standard error of the minimum</li>
+</ul>
+<p><strong>Step 5: Refit Final Model</strong></p>
+<ul>
+<li>Refit preprocessing on full training set</li>
+<li>Train final model on full training set: <span class="math display">\[\widehat{f}_{\lambda^*} = \arg\min_f \frac{1}{n}\sum_{i=1}^{n}L(y_i, f(x_i)) + \lambda^* R(f)\]</span></li>
+</ul>
+<p><strong>Step 6: Final Test Evaluation</strong></p>
+<ul>
+<li>Evaluate <span class="math inline">\(\widehat{f}_{\lambda^*}\)</span> on held-out test set</li>
+</ul>
 </section>
 <section id="r-code" class="level3">
 <h3 class="anchored" data-anchor-id="r-code">R Code</h3>
